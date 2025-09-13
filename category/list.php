@@ -12,10 +12,22 @@
 </head>
 
 <body>
+    <?php
+    require_once("../db/connection.php");
+
+    $sql = "select * from category";
+    $res = $pdo->query($sql);
+    $res->execute();
+
+    $data = $res->fetchAll(PDO::FETCH_ASSOC);
+
+    // echo "<pre>";
+    // print_r($data);
+    ?>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-4 shadow-sm p-5">
-                <form action="" method="POST">
+            <div class="col-4 p-5">
+                <form action="create.php" method="POST">
                     <div class="">
                         <input type="text" name="category" id="" class="form-control" placeholder="Category Name..">
                     </div>
@@ -26,24 +38,28 @@
                 </form>
             </div>
             <div class="col">
-                <div class="row shadow-sm p-4">
-                    <div class="col-7">
-                        <div class="">
-                            <h4>Category Name</h4>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-secondary">Delete</button>
-                        <button class="btn btn-danger">Update</button>
-                    </div>
-                </div>
+                <?php
+                 foreach($data as $item) {
+                    echo ' <div class="row shadow-sm p-4">
+                                <div class="col-7">
+                                    <div class="">
+                                        <h4>' . $item['name'] . '</h4>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <a href="delete.php?id='.$item['id'].'">
+                                        <button class="btn btn-secondary">Delete</button>
+                                    </a>
+                                    <a href="update_page.php?id='.$item['id'].'">
+                                        <button class="btn bg-dark text-white">Update</button>
+                                    </a>    
+                                </div>
+                            </div>';
+                }
+                ?>
             </div>
         </div>
     </div>
-
-    <?php
-
-    ?>
 </body>
 <!-- MDB -->
 <script
