@@ -25,6 +25,12 @@
     // print_r($data);
     ?>
     <div class="container mt-5">
+         <div class="row">
+            <div class="col-2 offset-5">
+                <?php 
+                require_once("../source/nav.php"); ?>
+            </div>
+        </div>
         <div class="row">
             <div class="col-4 p-5">
                 <form action="create.php" method="POST">

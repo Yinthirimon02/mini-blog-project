@@ -2,10 +2,14 @@
 require_once("../db/connection.php");
 $category = $_POST['category'];
 
-$sql = "insert into category(name) values (?)";
+if ($category != "") {
+    $sql = "insert into category(name) values (?)";
 
-$res = $pdo->prepare($sql);
+    $res = $pdo->prepare($sql);
 
-$res->execute([$category]);
+    $res->execute([$category]);
 
-header("Location: list.php");
+    header("Location: list.php");
+}else{
+    header("Location: list.php");
+}
