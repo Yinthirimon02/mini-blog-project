@@ -25,13 +25,7 @@
 
     $data = $res->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql_category = "select * from category";
-
-    $res_category = $pdo->query($sql_category);
-
-    $res_category->execute();
-
-    $data_category = $res_category->fetchAll(PDO::FETCH_ASSOC);
+    require_once("../source/category_list.php")
 
     // echo "<pre>";
     // print_r($data_category);
@@ -50,7 +44,7 @@
             <div class="col-4 p-5">
                 <form action="create.php" method="POST" enctype="multipart/form-data">
                     <div class="mt-2">
-                        <img src="" alt="" id="output" class="w-100">
+                        <img src="" alt="" id="output" class="w-50">
                     </div>
                     <div class="mt-2">
                         <input type="file" name="image" class="form-control" onchange="loadFile(event)">
@@ -81,27 +75,30 @@
             <div class="col">
                 <div class="row" style="margin-top: 80px;">
                     <?php
-                        foreach($data as $item) {
-                            echo '<div class="col-4 mt-3">
+                    foreach ($data as $item) {
+                        echo '<div class="col-4 mt-3">
                         <div class="card">
                             <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
-                                <img src="../image/'.$item["image"].'" class="img-fluid" style="height:250px" />
+                                <img src="../image/' . $item["image"] . '" class="img-fluid" style="height:250px" />
                                 <a href="#!">
                                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                                 </a>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">'.$item["title"].'</h5>
-                                <p class="card-text">'.mb_strimwidth($item["description"],0,50,'...').'</p>
-                                <p class="card-text text-danger">'.$item["category_name"].'</p>
-                                <a href="#!" class="btn bg-dark text-white" data-mdb-ripple-init>More Details</a>
-                                 <a href="#!" class="btn bg-danger text-white" data-mdb-ripple-init>
-                                    <i class="fa-solid fa-trash"></i>
-                                 </a>
+                                <h5 class="card-title">' . $item["title"] . '</h5>
+                                <p class="card-text">' . mb_strimwidth($item["description"], 0, 50, '...') . '</p>
+                                <p class="card-text text-danger">' . $item["category_name"] . '</p>
+                                <div class="row">
+                                    <div class="col-7"></div>
+                                    <a href="detail.php?id=' . $item["id"] . '" class="col-1 text-white mx-1" data-mdb-ripple-init><i class="fa-solid fa-circle-info text-secondary"></i></a>
+                                    <a href="update_page.php?id=' . $item["id"] . '" class="col-1 text-white mx-1" data-mdb-ripple-init><i class="fa-solid fa-pen-to-square text-primary"></i></a>
+                                    <a href="delete.php?id=' . $item["id"] . '" class="col-1 text-white mx-1" data-mdb-ripple-init><i class="fa-solid fa-trash text-danger"></i></a>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>';
-                        }
+                    }
 
                     ?>
 
