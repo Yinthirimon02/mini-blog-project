@@ -6,7 +6,7 @@ $title = $_POST['title'];
 $description = $_POST['description'];
 $category_id = $_POST['category'];
 
-$image_name = $_FILES['image']['name'];
+$image_name = uniqid() . $_FILES['image']['name'];
 $tmp_name = $_FILES['image']['tmp_name'];
 
 $target_file = "../image/" . $image_name;

@@ -1,15 +1,19 @@
 <?php
-require_once("../db/connection.php");
-$category = $_POST['category'];
 
-if ($category != "") {
+$categoryRequireStatus = false;
+
+if ($_REQUEST['category'] != "") {
+    require_once("../db/connection.php");
+
+    $category = $_POST['category'];
+
     $sql = "insert into category(name) values (?)";
 
     $res = $pdo->prepare($sql);
 
     $res->execute([$category]);
 
-    header("Location: list.php");
+    $categoryRequireStatus = false;
 }else{
-    header("Location: list.php");
+    $categoryRequireStatus = true;
 }

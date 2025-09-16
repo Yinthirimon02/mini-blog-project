@@ -29,7 +29,7 @@
 
     // print_r($data);
 
-    require_once("../source/category_list.php")
+    require_once("./helper/category_list.php");
 
     ?>
     <div class="container mt-5">
@@ -62,7 +62,7 @@
                                 ?>
                             </select>
 
-                            <input type="submit" value="" class="btn bg-dark text-white mt-5" value="Update">
+                            <input type="submit" value="Update" class="btn bg-black text-white mt-5">
                        </div>
 
                     </div>
@@ -76,18 +76,6 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/9.2.0/mdb.umd.min.js">
 </script>
 
-<script>
-    function loadFile(event) {
-        var reader = new FileReader();
-
-        reader.onload = function() {
-            var output = document.getElementById('output');
-
-            output.src = reader.result;
-        };
-
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
+<script src="../js/imagePreview.js"></script>
 
 </html>

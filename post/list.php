@@ -17,7 +17,7 @@
 
     require_once("../db/connection.php");
 
-    $sql = "select post.id, post.title, post.description, post.image, post.category_id, category.name as category_name from post left join category on category.id   =  post.category_id";
+    $sql = "select post.id, post.title, post.description, post.image, post.category_id, category.name as category_name from post left join category on category.id   =  post.category_id order by post.created_at";
 
     $res = $pdo->query($sql);
 
@@ -25,7 +25,7 @@
 
     $data = $res->fetchAll(PDO::FETCH_ASSOC);
 
-    require_once("../source/category_list.php")
+    require_once("./helper/category_list.php");
 
     // echo "<pre>";
     // print_r($data_category);
@@ -90,9 +90,9 @@
                                 <p class="card-text text-danger">' . $item["category_name"] . '</p>
                                 <div class="row">
                                     <div class="col-7"></div>
-                                    <a href="detail.php?id=' . $item["id"] . '" class="col-1 text-white mx-1" data-mdb-ripple-init><i class="fa-solid fa-circle-info text-secondary"></i></a>
-                                    <a href="update_page.php?id=' . $item["id"] . '" class="col-1 text-white mx-1" data-mdb-ripple-init><i class="fa-solid fa-pen-to-square text-primary"></i></a>
-                                    <a href="delete.php?id=' . $item["id"] . '" class="col-1 text-white mx-1" data-mdb-ripple-init><i class="fa-solid fa-trash text-danger"></i></a>
+                                    <a href="detail.php?id=' . $item["id"] . '" class="col-1 text-white mx-1" class="col-1"><i class="fa-solid fa-circle-info text-secondary"></i></a>
+                                    <a href="update_page.php?id=' . $item["id"] . '" class="col-1 text-white mx-1" class="col-1"><i class="fa-solid fa-pen-to-square text-primary"></i></a>
+                                    <a href="delete.php?id=' . $item["id"] . '" class="col-1 text-white mx-1" class="col-1"><i class="fa-solid fa-trash text-danger"></i></a>
                                 </div>
                                 
                             </div>
@@ -112,18 +112,6 @@
     type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/9.2.0/mdb.umd.min.js">
 </script>
-<script>
-    function loadFile(event) {
-        var reader = new FileReader();
-
-        reader.onload = function() {
-            var output = document.getElementById('output');
-
-            output.src = reader.result;
-        };
-
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
+<script src="../js/imagePreview.js"></script>
 
 </html>

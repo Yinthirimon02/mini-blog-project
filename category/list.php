@@ -15,11 +15,7 @@
     <?php
     require_once("../db/connection.php");
 
-    $sql = "select * from category";
-    $res = $pdo->query($sql);
-    $res->execute();
-
-    $data = $res->fetchAll(PDO::FETCH_ASSOC);
+    require("./helper/category_list.php");
 
     // echo "<pre>";
     // print_r($data);
@@ -28,14 +24,27 @@
          <div class="row">
             <div class="col-2 offset-5">
                 <?php 
-                require_once("../source/nav.php"); ?>
+                require_once("../source/nav.php"); 
+                
+                if(isset($_POST['btn_create'])){
+                    require_once("./create.php");
+                    require("./helper/category_list.php");
+                }
+                ?>
             </div>
         </div>
         <div class="row">
             <div class="col-4 p-5">
-                <form action="create.php" method="POST">
+                <form method="POST">
                     <div class="">
                         <input type="text" name="category" id="" class="form-control" placeholder="Category Name..">
+                        <?php
+                        if (isset($_POST['btn_create'])){
+                            if($categoryRequireStatus){
+                                echo '<small class="text-danger">Category Required</small>';
+                            }
+                        }
+                        ?>
                     </div>
                     <div class="mt-3">
                         <input type="submit" value="Create" class="btn btn-primary" name="btn_create">
